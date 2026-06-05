@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case for Islam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f8f6f1;
+      --text: #1a1a1a;
+      --text2: rgba(0,0,0,0.5);
+      --text3: rgba(0,0,0,0.3);
+      --border: rgba(0,0,0,0.12);
+      --border2: rgba(0,0,0,0.2);
+      --border3: rgba(0,0,0,0.4);
+      --root-bg: #1a1a1a;
+      --root-text: #ffffff;
+      --hover: rgba(0,0,0,0.03);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --bg2: #1e1e1e;
+        --text: rgba(255,255,255,0.9);
+        --text2: rgba(255,255,255,0.45);
+        --text3: rgba(255,255,255,0.25);
+        --border: rgba(255,255,255,0.1);
+        --border2: rgba(255,255,255,0.2);
+        --border3: rgba(255,255,255,0.45);
+        --root-bg: #ffffff;
+        --root-text: #111111;
+        --hover: rgba(255,255,255,0.04);
+      }
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 0;
+    }
+    .hero-arabic {
+      font-size: 24px;
+      color: var(--text3);
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.06em;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--text2);
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 400px;
+      margin: 1rem auto 1.5rem;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--text3);
+      letter-spacing: 0.04em;
+    }
+
+    /* TREE CANVAS */
+    .canvas-wrap {
+      overflow-x: auto;
+      padding: 1.5rem 0 0.5rem;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      cursor: default;
+    }
+
+    /* DETAIL PANEL */
+    .detail {
+      min-height: 300px;
+      border-top: 0.5px solid var(--border);
+      padding: 2rem 0;
+    }
+    .detail-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      color: var(--text3);
+      font-size: 14px;
+      gap: 10px;
+      text-align: center;
+    }
+    .detail-empty svg {
+      opacity: 0.4;
+    }
+    .detail-content { display: none; }
+    .detail-content.visible { display: block; }
+
+    .d-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 0.5rem;
+    }
+    .d-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+    .d-question {
+      font-size: 15px;
+      color: var(--text2);
+      font-weight: 300;
+      margin-bottom: 1.75rem;
+      line-height: 1.65;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ARGUMENTS */
+    .args {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .arg {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .arg-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .arg-head:hover { background: var(--hover); }
+    .arg.open .arg-head { background: var(--bg2); }
+    .arg-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .arg-icon {
+      font-size: 20px;
+      color: var(--text3);
+      transition: transform 0.2s;
+      line-height: 1;
+      font-weight: 300;
+    }
+    .arg.open .arg-icon { transform: rotate(45deg); }
+    .arg-body {
+      display: none;
+      padding: 0 1.2rem;
+      border-top: 0.5px solid var(--border);
+    }
+    .arg.open .arg-body { display: block; }
+    .arg-body-inner {
+      padding: 0.875rem 0;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .bq {
+      border-left: 2px solid var(--border2);
+      padding-left: 1rem;
+      margin: 0.875rem 0;
+      font-style: italic;
+      color: var(--text2);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* CONTRIBUTE BAR */
+    .contrib {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0.875rem 1.2rem;
+      border: 0.5px dashed var(--border2);
+      border-radius: var(--radius);
+      margin-top: 0.5rem;
+    }
+    .contrib-t {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 300;
+    }
+    .contrib-t strong { font-weight: 500; color: var(--text); }
+    .contrib-btn {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      border: 0.5px solid var(--border2);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      background: none;
+      font-family: 'Outfit', sans-serif;
+      color: var(--text);
+      transition: background 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .contrib-btn:hover { background: var(--hover); }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--text3);
+      line-height: 1.8;
+    }
+    .footer a { color: var(--text2); text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 36px; }
+      .canvas-wrap { padding: 1rem 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-arabic">بِسْمِ ٱللَّٰهِ</div>
+    <h1>The Case<br>for <em>Islam</em></h1>
+    <p class="hero-sub">A rational, structured journey through the evidence for Islam — built on first principles.</p>
+    <div class="hint">&#8593; Click any node in the tree to explore</div>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="tree" width="680" height="340"></canvas>
+  </div>
+
+  <div class="detail" id="detail">
+    <div class="detail-empty" id="empty">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      Select a node above to explore the arguments
+    </div>
+
+    <!-- GOD'S EXISTENCE -->
+    <div class="detail-content" id="dc-G">
+      <div class="d-tag">Step 1 · God's existence</div>
+      <div class="d-title">Does God exist?</div>
+      <div class="d-question">"Before anything else, we must ask: is there a creator at all?"</div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The cosmological argument</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">Everything that begins to exist has a cause. The universe began to exist — confirmed by modern cosmology and the Big Bang. Therefore the universe has a cause that itself did not begin: an uncaused, eternal, immensely powerful being.<div class="bq">"The universe had a beginning, and therefore has a cause beyond itself."</div></div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The fine-tuning argument</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">The fundamental constants of the universe — gravity, the strong nuclear force, the cosmological constant — are calibrated to extraordinary precision. A tiny deviation in any of them and no stars, no planets, no life could exist. The probability of this arising by chance is astronomically small. Design is the most rational explanation.</div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The moral argument</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">Objective moral values exist — some things are wrong regardless of culture or opinion. But objective morality requires an objective moral standard beyond human invention. That standard cannot be grounded in matter or evolution alone. It requires a transcendent moral lawgiver: God.</div></div>
+        </div>
+      </div>
+      <div class="contrib">
+        <div class="contrib-t"><strong>Know a strong argument?</strong> Help us build the most complete case.</div>
+        <a class="contrib-btn" href="mailto:contribute@caseforislam.com?subject=Argument for: God's existence">Suggest one &rarr;</a>
+      </div>
+    </div>
+
+    <!-- ONENESS -->
+    <div class="detail-content" id="dc-O">
+      <div class="d-tag">Step 2 · God's oneness</div>
+      <div class="d-title">Is there only one God?</div>
+      <div class="d-question">"If a creator exists, is monotheism the only coherent position?"</div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The argument from omnipotence</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">True omnipotence cannot be shared. Two omnipotent beings would inevitably conflict — and whichever one gets overruled is not omnipotent. Therefore only one omnipotent being can exist.</div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The argument from simplicity</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">A single uncaused being is the most parsimonious explanation for the universe. Postulating multiple gods raises further unanswered questions: who created them? How do they coordinate? Occam's razor favours one.</div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The unified order argument</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">The universe operates under a single, consistent set of physical laws across billions of light years. This unified coherence points to a single will behind creation — not a committee of competing gods with conflicting visions.</div></div>
+        </div>
+      </div>
+      <div class="contrib">
+        <div class="contrib-t"><strong>Know a strong argument?</strong> Help us build the most complete case.</div>
+        <a class="contrib-btn" href="mailto:contribute@caseforislam.com?subject=Argument for: Oneness of God">Suggest one &rarr;</a>
+      </div>
+    </div>
+
+    <!-- REVELATION -->
+    <div class="detail-content" id="dc-R">
+      <div class="d-tag">Step 3 · Revelation</div>
+      <div class="d-title">Would God send guidance?</div>
+      <div class="d-question">"If God exists and is one, would He communicate with His creation?"</div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The argument from purpose</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">A God who creates humanity with consciousness, moral awareness, and the capacity to ask "why am I here?" — and then provides no answer — is inconsistent with perfect wisdom and care. If God is all-knowing and all-caring, revelation follows necessarily.</div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The argument from human need</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">Every human civilisation across history has sought guidance on how to live — evidence of a deep, universal need. A just God who implanted this need would not leave it unaddressed. The very hunger for meaning points to the existence of something that satisfies it.</div></div>
+        </div>
+      </div>
+      <div class="contrib">
+        <div class="contrib-t"><strong>Know a strong argument?</strong> Help us build the most complete case.</div>
+        <a class="contrib-btn" href="mailto:contribute@caseforislam.com?subject=Argument for: Revelation">Suggest one &rarr;</a>
+      </div>
+    </div>
+
+    <!-- AUTHENTICITY -->
+    <div class="detail-content" id="dc-A">
+      <div class="d-tag">Step 4 · Authenticity of the Quran</div>
+      <div class="d-title">Is the Quran from God?</div>
+      <div class="d-question">"Which text — if any — is genuinely divine?"</div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The literary miracle</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">The Quran challenged the finest poets and linguists of Arabia to produce even one chapter comparable to it. Fourteen centuries later, that challenge stands unmet. Even Islam's fiercest early opponents acknowledged its unparalleled linguistic power.<div class="bq">"This is not the speech of a human being." — Walid ibn al-Mughira, one of Islam's earliest opponents</div></div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">Perfect preservation</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">The Quran is the only ancient scripture with an unbroken chain of memorisation spanning 1400 years. Millions today recite the exact same text. No other religious scripture can claim this degree of verified, documented preservation.</div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">Scientific foreknowledge</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">The Quran describes embryological development, the expansion of the universe, and oceanographic phenomena — details that were unknown to 7th century Arabia and only confirmed by modern science centuries later.</div></div>
+        </div>
+      </div>
+      <div class="contrib">
+        <div class="contrib-t"><strong>Know a strong argument?</strong> Help us build the most complete case.</div>
+        <a class="contrib-btn" href="mailto:contribute@caseforislam.com?subject=Argument for: Authenticity of the Quran">Suggest one &rarr;</a>
+      </div>
+    </div>
+
+    <!-- PROPHETHOOD -->
+    <div class="detail-content" id="dc-P">
+      <div class="d-tag">Step 5 · Prophethood</div>
+      <div class="d-title">Was Muhammad &#65018; a true prophet?</div>
+      <div class="d-question">"Was he genuinely sent by God — or a fraud, a madman, or simply mistaken?"</div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The character argument</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">Before prophethood, Muhammad &#65018; was known unanimously as Al-Amin — the trustworthy. His enemies, who rejected his message fiercely, never accused him of lying in his personal life. A man of such established character does not fabricate the most consequential claim in history.</div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">No worldly motive</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">Muhammad &#65018; gained nothing materially for the first 13 years of his mission — only persecution, boycott, and the death of his closest loved ones. He was offered wealth, kingship, and fame by the Quraysh to stop. He refused every offer. Frauds do not pay this price.<div class="bq">"By God, if they placed the sun in my right hand and the moon in my left, I would not abandon this matter."</div></div></div>
+        </div>
+        <div class="arg">
+          <div class="arg-head" onclick="tog(this)"><span class="arg-name">The civilisational transformation</span><span class="arg-icon">+</span></div>
+          <div class="arg-body"><div class="arg-body-inner">An illiterate man in 7th century Arabia produced within 23 years a complete civilisational framework — legal, spiritual, and scientific — that transformed a fragmented tribal society into a global civilisation spanning continents. No naturalistic explanation is adequate for this transformation.</div></div>
+        </div>
+      </div>
+      <div class="contrib">
+        <div class="contrib-t"><strong>Know a strong argument?</strong> Help us build the most complete case.</div>
+        <a class="contrib-btn" href="mailto:contribute@caseforislam.com?subject=Argument for: Prophethood">Suggest one &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Open source &middot; Arguments curated and moderated by the Muslim community<br>
+    <a href="https://github.com/yourusername/case-for-islam">Contribute on GitHub</a>
+  </div>
+
+</div>
+
+<script>
+  const canvas = document.getElementById('tree');
+  const ctx = canvas.getContext('2d');
+  const W = 680, H = 340;
+
+  const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const clr = {
+    line:        isDark ? 'rgba(255,255,255,0.13)' : 'rgba(0,0,0,0.11)',
+    nodeBg:      isDark ? '#1a1a1a' : '#ffffff',
+    nodeBorder:  isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.13)',
+    nodeActiveBg:     isDark ? '#252525' : '#f8f6f1',
+    nodeActiveBorder: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)',
+    rootBg:   isDark ? '#ffffff' : '#1a1a1a',
+    rootText: isDark ? '#111111' : '#ffffff',
+    rootSub:  isDark ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.55)',
+    text:  isDark ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.85)',
+    sub:   isDark ? 'rgba(255,255,255,0.38)' : 'rgba(0,0,0,0.38)',
+    hover: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.03)',
+    proofBg:     isDark ? '#161616' : '#fafafa',
+    proofBorder: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)',
+    proofText:   isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)',
+  };
+
+  const ROOT = { x:340, y:52, r:40 };
+
+  const NODES = [
+    { id:'G', x:90,  y:188, w:112, h:58, label:'G — God',          sub:'Does He exist?' },
+    { id:'O', x:224, y:188, w:112, h:58, label:'O — Oneness',      sub:'Is He one?' },
+    { id:'R', x:358, y:188, w:116, h:58, label:'R — Revelation',   sub:'Did He speak?' },
+    { id:'A', x:494, y:188, w:124, h:58, label:'A — Authenticity', sub:'Is Quran His?' },
+    { id:'P', x:622, y:188, w:108, h:58, label:'P — Prophet ﷺ',    sub:'Was he sent?' },
+  ];
+
+
+
+  let active = null;
+  let hovered = null;
+
+  function roundRect(c, x, y, w, h, r) {
+    c.beginPath();
+    c.moveTo(x+r, y);
+    c.lineTo(x+w-r, y);
+    c.quadraticCurveTo(x+w, y, x+w, y+r);
+    c.lineTo(x+w, y+h-r);
+    c.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    c.lineTo(x+r, y+h);
+    c.quadraticCurveTo(x, y+h, x, y+h-r);
+    c.lineTo(x, y+r);
+    c.quadraticCurveTo(x, y, x+r, y);
+    c.closePath();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    NODES.forEach(n => {
+      const ny = n.y - n.h/2;
+      ctx.beginPath();
+      ctx.moveTo(ROOT.x, ROOT.y + ROOT.r);
+      ctx.bezierCurveTo(ROOT.x, ROOT.y + ROOT.r + 44, n.x, ny - 44, n.x, ny);
+      ctx.strokeStyle = clr.line;
+      ctx.lineWidth = 1;
+      ctx.setLineDash([]);
+      ctx.stroke();
+    });
+
+    PROOFS.forEach(p => {
+      const parent = NODES.find(n => n.id === p.parent);
+      if (!parent) return;
+      ctx.beginPath();
+      ctx.moveTo(parent.x, parent.y + parent.h/2);
+      ctx.lineTo(p.x, p.y - p.h/2);
+      ctx.strokeStyle = clr.line;
+      ctx.lineWidth = 0.5;
+      ctx.setLineDash([3, 4]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    ctx.beginPath();
+    ctx.arc(ROOT.x, ROOT.y, ROOT.r, 0, Math.PI * 2);
+    ctx.fillStyle = clr.rootBg;
+    ctx.fill();
+    ctx.fillStyle = clr.rootText;
+    ctx.font = '600 14px "Playfair Display", serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Islam', ROOT.x, ROOT.y - 3);
+    ctx.font = '300 10px Outfit, sans-serif';
+    ctx.fillStyle = clr.rootSub;
+    ctx.fillText('The truth', ROOT.x, ROOT.y + 12);
+
+    NODES.forEach(n => {
+      const nx = n.x - n.w/2, ny = n.y - n.h/2;
+      const isActive = active === n.id;
+      const isHover  = hovered === n.id;
+      roundRect(ctx, nx, ny, n.w, n.h, 10);
+      ctx.fillStyle = isActive ? clr.nodeActiveBg : isHover ? clr.hover : clr.nodeBg;
+      ctx.fill();
+      ctx.strokeStyle = isActive ? clr.nodeActiveBorder : clr.nodeBorder;
+      ctx.lineWidth = isActive ? 1.5 : 0.5;
+      ctx.stroke();
+
+      ctx.fillStyle = clr.text;
+      ctx.font = '500 12px Outfit, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.x, n.y - 5);
+      ctx.fillStyle = clr.sub;
+      ctx.font = '300 10px Outfit, sans-serif';
+      ctx.fillText(n.sub, n.x, n.y + 10);
+    });
+
+    PROOFS.forEach(p => {
+      const px = p.x - p.w/2, py = p.y - p.h/2;
+      roundRect(ctx, px, py, p.w, p.h, 6);
+      ctx.fillStyle = clr.proofBg;
+      ctx.fill();
+      ctx.strokeStyle = clr.proofBorder;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+      ctx.fillStyle = clr.proofText;
+      ctx.font = '300 10px Outfit, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(p.label, p.x, p.y + 4);
+    });
+  }
+
+  function getScale() {
+    return W / canvas.getBoundingClientRect().width;
+  }
+
+  function getNode(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const scale = getScale();
+    const sx = (clientX - rect.left) * scale;
+    const sy = (clientY - rect.top)  * scale;
+    return NODES.find(n =>
+      sx >= n.x - n.w/2 && sx <= n.x + n.w/2 &&
+      sy >= n.y - n.h/2 && sy <= n.y + n.h/2
+    ) || null;
+  }
+
+  function selectNode(id) {
+    active = active === id ? null : id;
+    document.querySelectorAll('.detail-content').forEach(el => el.classList.remove('visible'));
+    document.getElementById('empty').style.display = active ? 'none' : 'flex';
+    if (active) {
+      const dc = document.getElementById('dc-' + active);
+      if (dc) {
+        dc.classList.add('visible');
+        dc.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+    draw();
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    const n = getNode(e.clientX, e.clientY);
+    hovered = n ? n.id : null;
+    canvas.style.cursor = n ? 'pointer' : 'default';
+    draw();
+  });
+
+  canvas.addEventListener('click', e => {
+    const n = getNode(e.clientX, e.clientY);
+    if (n) selectNode(n.id);
+  });
+
+  canvas.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    const n = getNode(t.clientX, t.clientY);
+    if (n) selectNode(n.id);
+  }, { passive: false });
+
+  function tog(head) {
+    const arg = head.closest('.arg');
+    const wasOpen = arg.classList.contains('open');
+    arg.closest('.args').querySelectorAll('.arg').forEach(a => a.classList.remove('open'));
+    if (!wasOpen) arg.classList.add('open');
+  }
+
+  draw();
+</script>
+</body>
+</html>
