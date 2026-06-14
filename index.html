@@ -48,7 +48,7 @@ canvas{display:block;width:100%;}
   margin:2rem 2rem 0;border:0.5px solid #1e1e1e;border-radius:16px;overflow:hidden;
   opacity:0;max-height:0;transition:opacity .35s ease,max-height .5s ease;
 }
-.detail-panel.open{opacity:1;max-height:1000px;}
+.detail-panel.open{opacity:1;max-height:3600px;}
 
 .panel-head{padding:1.5rem 1.75rem;border-bottom:0.5px solid #1a1a1a;background:#0f0f0f;}
 .panel-tag{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#555;margin-bottom:.5rem;}
@@ -134,7 +134,7 @@ canvas{display:block;width:100%;}
     <div class="done-banner" id="doneBanner">
       <div class="done-title">You've heard the case.</div>
       <div class="done-sub">If something resonated — or if you have questions — we'd love to continue the conversation.</div>
-      <button class="done-btn" onclick="window.location.href='mailto:contact@caseforislam.com'">
+      <button class="done-btn" onclick="window.location.href='mailto:ahmedyo2001@gmail.com'">
         <i class="ti ti-message"></i> Get in touch
       </button>
     </div>
@@ -155,7 +155,9 @@ const DATA = [
     args:[
       {name:'The cosmological argument', body:'Everything that begins to exist has a cause. The universe began to exist — confirmed by modern cosmology and the Big Bang. Therefore the universe has a cause that itself did not begin: an uncaused, eternal, immensely powerful being outside of space and time.'},
       {name:'The fine-tuning argument', body:'The fundamental constants of nature — gravity, the cosmological constant, the strong nuclear force — are calibrated to extraordinary precision. A tiny deviation in any of them and no stars, planets, or life could exist. The probability of this arising by chance is so small as to be effectively impossible. Design is the most rational explanation.'},
-      {name:'The moral argument', body:'Objective moral values exist — torturing children for pleasure is wrong regardless of what any culture believes. But objective morality requires a standard beyond matter or evolution, which can only ground relative preferences. A transcendent moral lawgiver is the best explanation.'}
+      {name:'The moral argument', body:'Objective moral values exist — torturing children for pleasure is wrong regardless of what any culture believes. But objective morality requires a standard beyond matter or evolution, which can only ground relative preferences. A transcendent moral lawgiver is the best explanation.'},
+      {name:'The argument from design', body:"Everyday objects that show order and complexity always turn out to have a designer behind them. If you found a working watch on a beach, you would never assume the parts assembled themselves by chance — you would recognise it was made by someone. The same logic applies to something as simple as a water bottle, or to the word 'hello' written in the sand: order points to an author, not to chance. The universe displays vastly more order and complexity than any of these — from the laws of physics down to a single solar system — making the case for a Designer even stronger."},
+      {name:'Fine-tuning of our solar system', body:"Beyond the cosmic constants, our own solar system shows remarkable precision. The sun sits at almost exactly the right distance from Earth — any closer and we would burn, any further and we would freeze. Earth's axial tilt keeps the seasons stable, the size of the moon helps regulate the length of our day, the strength of gravity holds everything in place without crushing it, and the ozone layer shields life from harmful radiation. Each factor on its own would be a remarkable coincidence; together, they read less like accident and more like design."}
     ],
     x:.1, y:.55
   },
@@ -166,45 +168,44 @@ const DATA = [
     args:[
       {name:'The argument from omnipotence', body:'True omnipotence cannot be shared. If two beings each claim to be all-powerful, they would inevitably conflict — and the one who is overruled is not truly omnipotent. Therefore only one omnipotent being can exist.'},
       {name:'The argument from simplicity', body:'A single, uncaused, all-powerful being is the most parsimonious explanation for the universe. Postulating multiple gods raises further unanswered questions: who created them? How do they coordinate? Occam\'s razor favours one.'},
-      {name:'The argument from universal order', body:'The cosmos operates under one consistent set of physical laws across billions of light years. This unified coherence points to a single will behind creation — not a committee of competing gods.'}
+      {name:'The argument from universal order', body:'The cosmos operates under one consistent set of physical laws across billions of light years. This unified coherence points to a single will behind creation — not a committee of competing gods.'},
+      {name:'The argument from conflicting wills', body:"Imagine two equally all-powerful gods, one wanting a room painted yellow and the other wanting it painted blue. If both are truly omnipotent, neither can be overruled — so the result is not a paint job at all, but paradox. Multiple gods with independent, potentially conflicting wills would produce contradiction and breakdown rather than the stable, consistent laws that govern the entire universe. The order actually observed — one set of physical laws operating the same way across billions of light years — fits far better with a single will behind it all (echoed in the Quran, 21:22)."},
+      {name:'The argument against infinite regress', body:"A natural question follows: if everything needs a creator, who created God? But an infinite chain of creators could never actually get anything started — much like an echo cannot have been bouncing forever with no original sound, or a line of neighbours who each refuse to help unless their neighbour helps first will never get the job done. For the universe to exist at all, there must be one being at the start of the chain who is uncreated and self-sufficient. And just as a carpenter is not made of the same material as the chair he builds, this uncreated creator is necessarily different in nature from the created universe — not a part of it, dependent on it, or limited by it."}
     ],
-    x:.3, y:.55
+    x:.37, y:.55
   },
   {
     id:'R', letter:'R', label:'Revelation',
     tag:'Step 3 · Revelation', q:'Would God send guidance?',
-    desc:'If God exists and is one, would He communicate with humanity?',
+    desc:'If God exists and is one, would He communicate with humanity — and does the Quran show the marks of being that communication?',
     args:[
       {name:'The argument from purpose', body:'A God who creates conscious beings capable of asking "why am I here?" — and then provides no answer — is inconsistent with perfect wisdom and care. If God is all-knowing and all-caring, guidance to humanity follows necessarily.'},
-      {name:'The argument from human need', body:'Every human civilisation in history has sought guidance on how to live — moral frameworks, sacred texts, prophetic figures. This is a universal human need. A just God who implanted this need would not leave it permanently unaddressed.'}
-    ],
-    x:.5, y:.55
-  },
-  {
-    id:'A', letter:'A', label:'Quran',
-    tag:'Step 4 · Authenticity of the Quran', q:'Is the Quran from God?',
-    desc:'If God would send revelation, which text is genuinely divine?',
-    args:[
+      {name:'The argument from human need', body:'Every human civilisation in history has sought guidance on how to live — moral frameworks, sacred texts, prophetic figures. This is a universal human need. A just God who implanted this need would not leave it permanently unaddressed.'},
+      {name:'The instruction manual analogy', body:"Every product you buy — a phone, a washing machine, even simple furniture — comes with a manual explaining how to use it, along with warnings about misuse. A creator who designed human beings with such care, and who provides for basic needs like food, water and air, would be expected to also provide guidance on how those human beings are meant to live — a kind of manual for life. This is precisely the role the Quran describes for itself: practical guidance covering honesty, charity, family life, and how to treat others, alongside its account of where we came from and why."},
       {name:'The literary miracle', body:'The Quran challenged the finest poets and linguists of Arabia to produce even one chapter comparable to it. Fourteen centuries later, that challenge stands unmet. Arab scholars who rejected Islam nonetheless acknowledged its unparalleled power.', quote:'"This is not the speech of a human being." — Walid ibn al-Mughira, one of Islam\'s earliest opponents'},
       {name:'Perfect preservation', body:'The Quran is the only ancient scripture with an unbroken, documented chain of memorisation across 1400 years. Millions of Muslims today recite the exact same text — word for word — as was revealed to the Prophet ﷺ.'},
-      {name:'Scientific foreknowledge', body:'The Quran contains accurate descriptions of embryological development, the expansion of the universe, and the barrier between bodies of water — phenomena not known to 7th century Arabia and only confirmed by modern science centuries later.'}
+      {name:'Scientific foreknowledge', body:'The Quran contains accurate descriptions of embryological development, the expansion of the universe, and the barrier between bodies of water — phenomena not known to 7th century Arabia and only confirmed by modern science centuries later.'},
+      {name:'Mountains and the origin of life', body:"The Quran describes mountains as pegs or stakes anchoring the earth (78:6-7) — and modern geology has confirmed that mountains have deep roots extending far below the surface into the crust, anchoring the tectonic plates in a way that is invisible from above ground. Separately, the Quran states that every living thing was made from water (21:30), matching the modern understanding that water is essential to all known life and is the very first thing scientists look for when searching for life elsewhere in the universe. Neither fact could have been confirmed with the instruments available in 7th-century Arabia."},
+      {name:'The fulfilled prophecy', body:"The Quran contains specific predictions that came true after it was revealed. Early in Surah Ar-Rum, revealed shortly after the Byzantines (the 'Romans') suffered a heavy defeat to the Persians, the Quran predicted that the Romans would be victorious again within a specified number of years (30:2-4) — at a moment when such a reversal looked highly unlikely. According to early sources, the prophecy was fulfilled within that timeframe, something that could not have been reliably guessed from the political situation of the time."}
     ],
-    x:.7, y:.55
+    x:.63, y:.55
   },
   {
     id:'P', letter:'P', label:'Prophet ﷺ',
-    tag:'Step 5 · Prophethood', q:'Was Muhammad ﷺ a true prophet?',
+    tag:'Step 4 · Prophethood', q:'Was Muhammad ﷺ a true prophet?',
     desc:'Was he genuinely sent by God — or a fraud, a madman, or mistaken?',
     args:[
       {name:'The character argument', body:'Before prophethood, Muhammad ﷺ was known unanimously as Al-Amin — the trustworthy. His fiercest enemies, who rejected his message completely, never accused him of lying in his personal life. A man of such established integrity does not fabricate the most consequential claim in human history.'},
       {name:'No worldly motive', body:'Muhammad ﷺ gained nothing materially from his message for 13 years — only persecution, social boycott, and the loss of loved ones. The leaders of Quraysh offered him wealth, power, and status to stop. He refused every offer.', quote:'"By God, if they placed the sun in my right hand and the moon in my left to abandon this matter, I would not abandon it."'},
-      {name:'The civilisational transformation', body:'An illiterate man in 7th century Arabia produced, within 23 years, a complete civilisational framework — legal, moral, spiritual, scientific — that transformed a fragmented tribal society into a global civilisation spanning three continents. No naturalistic explanation is adequate.'}
+      {name:'The civilisational transformation', body:'An illiterate man in 7th century Arabia produced, within 23 years, a complete civilisational framework — legal, moral, spiritual, scientific — that transformed a fragmented tribal society into a global civilisation spanning three continents. No naturalistic explanation is adequate.'},
+      {name:'The trilemma: liar, deluded, or true', body:"If Muhammad ﷺ was not telling the truth about receiving revelation, only two alternatives remain: he was deliberately lying, or he was sincerely mistaken. The 'liar' option sits awkwardly with his reputation — even his harshest opponents, who rejected his message entirely, never accused him of personal dishonesty, and a liar chasing worldly gain would not endure thirteen years of persecution while turning down every offer of wealth and power. The 'deluded' option is no easier: someone simply mistaken about receiving revelation would not be expected to produce a text with the linguistic precision, internal consistency, and depth of content found in the Quran. Once both alternatives are set aside, the remaining explanation is that he was telling the truth."},
+      {name:'The argument from self-critical verses', body:"If Muhammad ﷺ had written the Quran himself to serve his own interests, it is hard to explain why it contains verses that gently correct or address him personally. In Surah Abasa, he is corrected for turning away from a blind man seeking knowledge; elsewhere, verses speak directly to his personal conduct (66:1, 33:37). A person fabricating scripture to elevate his own authority would have little reason to include passages recording his own missteps — their presence fits more naturally with a text he received than one he composed for himself."}
     ],
     x:.9, y:.55
   }
 ];
 
-const EDGES = [['root','G'],['root','O'],['root','R'],['root','A'],['root','P']];
+const EDGES = [['root','G'],['root','O'],['root','R'],['root','P']];
 
 let W=0,H=0,ctx=null,nodeEls={},activeId=null,animated=false;
 
@@ -309,7 +310,7 @@ function selectNode(id){
   document.getElementById('panelTag').textContent=node.tag;
   document.getElementById('panelQ').textContent=node.q;
   document.getElementById('panelDesc').textContent=node.desc;
-  document.getElementById('suggestBtn').onclick=()=>window.location.href='mailto:contact@caseforislam.com?subject=Argument suggestion: '+node.tag;
+  document.getElementById('suggestBtn').onclick=()=>window.location.href='mailto:ahmedyo2001@gmail.com?subject='+encodeURIComponent('Argument suggestion: '+node.tag);
 
   const list=document.getElementById('argsList');
   list.innerHTML='';
@@ -336,7 +337,7 @@ function selectNode(id){
 const visited=new Set();
 function checkDone(){
   if(activeId) visited.add(activeId);
-  if(visited.size===5) document.getElementById('doneBanner').classList.add('show');
+  if(visited.size===4) document.getElementById('doneBanner').classList.add('show');
 }
 
 document.getElementById('startBtn').addEventListener('click',()=>{
